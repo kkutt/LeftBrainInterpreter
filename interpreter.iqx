@@ -221,7 +221,10 @@ po lewej stronie będzie łatwiej skojarzyć z opisanymi sytuacjami.
 / caption = "To już koniec badania. Dziękujemy za udział!
 
 
-Badanie miało na celu sprawdzenie hipotezy zakładającej, że w związku z różnicami sposobu w jaki lewa i prawa półkula mózgu przetwarza informacje językowe słowa po lewej stronie będzie łatwiej skojarzyć z opisanymi sytuacjami.
+Badanie miało na celu sprawdzenie hipotezy zakładającej, że w związku
+z różnicami sposobu w jaki lewa i prawa półkula mózgu przetwarza
+informacje językowe, słowa po lewej stronie będzie łatwiej skojarzyć
+z opisanymi sytuacjami.
 
 Ty wybrałeś/aś <%values.sum_total-values.sum_right%> słów po lewej i <%values.sum_right%> słów po prawej stronie."
 / questions = [1=select_student]
@@ -230,7 +233,8 @@ Ty wybrałeś/aś <%values.sum_total-values.sum_right%> słów po lewej i <%valu
 </surveypage>
 
 <dropdown select_student>
-/ caption = "Na zakończenie prosimy jeszcze, abyś wskazał/a osobę, która zaprosiła Cię do udziału w tym badaniu:"
+/ caption = "Na zakończenie prosimy jeszcze, abyś wskazał/a osobę,
+która zaprosiła Cię do udziału w tym badaniu:"
 / options = ("Katarzyna Dudek", "Kinga Dudzik", "Jan Giza", "Helena Greber", "Monika Halicka", "Iwona Kopeć",
 "Weronika Kot", "Krzysztof Kutt", "Mateusz Młynarczyk", "Anna Nowak", "Joanna Nowak", "Maciej Szul", "Maciej Ścibor",
 "Anna Tereszko", "Anna Wasik", "Katarzyna Wiernasz", "Paulina Wróbel", "Agata Zimirska")
@@ -252,14 +256,16 @@ Ty wybrałeś/aś <%values.sum_total-values.sum_right%> słów po lewej i <%valu
 
 
 <surveypage p1>
-/ caption = "Przy każdej z wymienionych czynności i przedmiotów zaznacz której ręki wolisz używać"
+/ caption = "Przy każdej z wymienionych czynności i przedmiotów zaznacz
+której ręki wolisz używać"
 / questions = [1=q1, q2, q3, q4, q5]
 / recorddata = false
 / nextbuttonposition = (90,90)
 </surveypage>
 
 <surveypage p2>
-/ caption = "Przy każdej z wymienionych czynności i przedmiotów zaznacz której ręki wolisz używać"
+/ caption = "Przy każdej z wymienionych czynności i przedmiotów zaznacz
+której ręki wolisz używać"
 / questions = [1=q6, q7, q8, q9, q10]
 / recorddata = false
 / nextbuttonposition = (90,90)
