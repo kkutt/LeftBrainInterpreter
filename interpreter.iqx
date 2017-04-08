@@ -20,17 +20,14 @@ Zapisywane są póki co dane surowe oraz krótkie podsumowanie
 
 ** Zmienne do modyfikacji:
 ------------Pozycje bodźców na ekranie ------------------ w procentach wielkości ekranu, można w pikselach
-left_xpos - pozycja lewego słowa na ekranie - w poziomie  
-left_ypos - pozycja lewego słowa na ekranie - w pionie 
+/left_xpos - pozycja lewego słowa na ekranie - w poziomie  
+/left_ypos - pozycja lewego słowa na ekranie - w pionie 
 analogicznie z prawym słowem (right_*pos) i zdaniem (sentence_*pos) 
 
 ----------- Czas wyświetlania elementów i przerwy -------  ? w ms czy lepiej w ramkach, by wyliczyć dokładny czas prezentacji ?
 /sentenceduration - czas wyświetlania zdania przed słowami
-/fixationduration  - czas wyświetlania samego punktu fiksacji
-/targetduration = - czas wyświetlania punktu fiksacji + słów
-/blank_ans_duration - czas wyświetlania pustego ekranu i oczekiwania na odpowiedz po zniknięciu słów
-/fixation_posttrialpause - przerwa między fiksacją a słowami
-/blank_ans_posttrialpause - przerwa między kolejnymi przykładami 
+/fixationduration - czas wyświetlania samego punktu fiksacji
+/targetduration   - czas wyświetlania punktu fiksacji + słów
 ? jeśli ma być losowany czas wyswietlania czegokolwiek to albo zrobić counter, albo użyć expressions 
 
 ----------- Klawisze odpowiedzi -------------------------
@@ -38,10 +35,9 @@ analogicznie z prawym słowem (right_*pos) i zdaniem (sentence_*pos)
 /responsekey_right - klawisz odpowiedzi przypisany do prawej strony (z.help)
 /response_left_letter - to co w responsekey_left tylko zapisane jako litera; right analogicznie
 
-
 -------------------------------------
 Oprócz tu modyfikowanych zmiennych, ważne zmienne modyfikowane niżej w kodzie to
-- liczba triali w bloku eksperymentalnym (pod koniec, w elemencie "< block interpreter >" )
+- liczba triali w bloku eksperymentalnym (w elementach "< block interpreterX >" )
 - listy zdań i rzeczowników (przy rzeczownikach należy osobno poniżej wpisać ich liczbę)
 
 <values> 
@@ -55,10 +51,9 @@ Oprócz tu modyfikowanych zmiennych, ważne zmienne modyfikowane niżej w kodzie
 / sentenceduration = 2000
 / fixationduration = 800
 / targetduration = 150
-/ blank_ans_duration= 5000
-/ fixation_posttrialpause = 0
-/ blank_ans_posttrialpause = 5000
 / trening_feedback_duration = 2000
+/ trening_remind_delay = 5000
+/ trening_posttrialpause = 1000
 
 / responsekey_left = 33
 / responsekey_right = 36
@@ -68,19 +63,15 @@ Oprócz tu modyfikowanych zmiennych, ważne zmienne modyfikowane niżej w kodzie
 
 
 ** Zmienne do zapisu danych, uaktualniane w trakcie 
-/sum_total - ile prób
-/sum_right - ile wybranych z prawej strony
-/sum_ans    - w ilu próbach pojawiła się odpowiedź
-/percent_right     - w ilu % z wszystkich prób odpowiedź dot. prawej strony (=prawa/próby) 
-/percent_left  
-/percent_ansright  -ile % z odpowiedzi dotyczyło prawej strony  (=prawa/próby z odpowiedziami)
+/sum_total     - ile prób
+/sum_right     - ile wybranych z prawej strony
+/percent_right - w ilu % z wszystkich prób odpowiedź dot. prawej strony (=prawa/próby)
+/percent_left
 <values>
 /sum_total=0
 /sum_right=0
-/sum_ans=0
 /percent_right=0
 /percent_left=0
-/percent_ansright=0
 </values>
 
 
@@ -98,10 +89,9 @@ radiobuttons.q1.selectedvalue, radiobuttons.q2.selectedvalue, radiobuttons.q3.se
 radiobuttons.q4.selectedvalue, radiobuttons.q5.selectedvalue, radiobuttons.q6.selectedvalue, 
 radiobuttons.q7.selectedvalue, radiobuttons.q8.selectedvalue, radiobuttons.q9.selectedvalue, 
 radiobuttons.q10.selectedvalue,
-values.fixationduration, values.sentenceduration, values.targetduration, values.blank_ans_duration,
+values.fixationduration, values.sentenceduration, values.targetduration,
 text.sentence.currentitem, text.lefttarget.currentitem, text.righttarget.currentitem,
-values.responsekey_right, trial.target.response, trial.blank.response,
- trial.target.latency, trial.blank.latency ]
+trial.target.response, trial.blank.response, trial.target.latency, trial.blank.latency ]
 </data>
 
 
@@ -121,9 +111,10 @@ radiobuttons.q9.selectedvalue + radiobuttons.q10.selectedvalue)
 /file = "Interpreter_summary.iqdat"
 /columns = [script.startdate, script.starttime, script.subjectid,
 expressions.oldfield_suma,
-values.fixationduration, values.targetduration, values.blank_ans_duration,
-values.fixation_posttrialpause, values.blank_ans_posttrialpause, values.response_left_letter, values.response_right_letter, 
- values.sum_total, values.sum_ans, values.sum_right, values.percent_right, values.percent_ansright, values.percent_left ]
+values.fixationduration, values.targetduration,
+values.response_left_letter, values.response_right_letter, 
+values.sum_total, values.sum_right,
+values.percent_right, values.percent_left ]
 </summarydata>
 
 
@@ -151,27 +142,26 @@ values.fixation_posttrialpause, values.blank_ans_posttrialpause, values.response
 
 <page welcome>
 ^Dziękujemy, że zdecydowałaś/eś się wziąć udział w naszym badaniu!
-^^ Składa się ono z trzech części:
-^ 1) Kwestionariusza,
-^ 2) Sesji treningowej,
-^ 3) Sesji testowej.
-^^ Całość badania nie potrwa dłużej niż 10 minut.
-^^^ Gdy będziesz gotowy/a, naciśnij spację i przejdziemy do części pierwszej.
+^^Składa się ono z trzech części:
+^1) Kwestionariusza,
+^2) Sesji treningowej,
+^3) Sesji testowej.
+^^Całość badania nie potrwa dłużej niż 10 minut.
+^^^Gdy będziesz gotowy/a, naciśnij spację i przejdziemy do części pierwszej.
 </page> 
 
 <page instructions> 
 ^Teraz nastąpi właściwa część badania.
 ^^^W każdej próbie pojawi się przed tobą krótkie zdanie. Przeczytaj je dokładnie. 
-^ Gdy zdanie zniknie, skoncentruj wzrok na "+" w centrum ekranu. 
+^Gdy zdanie zniknie, skoncentruj wzrok na "+" w centrum ekranu. 
 ^Po chwili po obu stronach "+" ukażą się na krótko dwa słowa. 
-^^ Zdecyduj, które z nich lepiej nadaje się jako wyjaśnienie sytuacji przedstawionej w zdaniu. 
-^^ Jeśli będzie to słowo po lewej stronie, naciśnij klawisz <%values.response_left_letter%>, a jeśli po prawej, wybierz klawisz <%values.response_right_letter%>.
-^^^ W tym zadaniu nie ma dobrych i złych odpowiedzi. Spróbuj wymyślić, które słowo może być związane z przyczyną sytuacji. Możesz zdać się na swoją intuicję. 
+^^Zdecyduj, które z nich lepiej nadaje się jako wyjaśnienie sytuacji przedstawionej w zdaniu. 
+^^Jeśli będzie to słowo po lewej stronie, naciśnij klawisz <%values.response_left_letter%>, a jeśli po prawej, wybierz klawisz <%values.response_right_letter%>.
+^^^W tym zadaniu nie ma dobrych i złych odpowiedzi. Spróbuj wymyślić, które słowo może być związane z przyczyną sytuacji. Możesz zdać się na swoją intuicję. 
 </page> 
-^^ Po zniknięciu słów na odpowiedź będzie <%values.blank_ans_duration/1000 %> sekund.
 
 <page trening> 
-^Rozpocznijmy od sesji treningowej - ma ona na celu upewnienie się, że wszystko jest jasne. Jej wynik nie zostanie zapisany.
+^Rozpocznijmy od sesji treningowej - ma ona na celu upewnienie się, że procedura jest jasna. Jej wynik nie zostanie zapisany.
 ^^Połóż palec wskazujący lewej ręki na klawiszu <%values.response_left_letter%> a palec wskazujący prawej ręki na klawiszu <%values.response_right_letter%>.
 ^^Gdy będziesz gotowy/a, naciśnij spację. </page> 
 
@@ -186,8 +176,7 @@ values.fixation_posttrialpause, values.blank_ans_posttrialpause, values.response
 </page>
 
 <page the_end> 
-^^^To już koniec badania.
-Dziękujemy za udział.
+^^^To już koniec badania. Dziękujemy za udział!
 </page>
 
 
@@ -211,7 +200,6 @@ Dziękujemy za udział.
 /recorddata = false
 / nextbuttonposition = (90,90)
 </surveypage>
-
 
 <surveypage p2>
 / caption = "Przy każdej z wymienionych czynności i przedmiotów zaznacz której ręki wolisz używać"
@@ -261,6 +249,7 @@ Dziękujemy za udział.
 / position = (10,73)
 </radiobuttons>
 
+
 <radiobuttons q6>
 / caption = "Nóż (bez widelca)"
 / options = ("Zawsze lewej", "Zazwyczaj lewej", "Wszystko jedno", "Zazwyczaj prawej", "Zawsze prawej")
@@ -268,7 +257,6 @@ Dziękujemy za udział.
 / orientation = horizontal
 / position = (10,25)
 </radiobuttons>
-
 
 <radiobuttons q7>
 / caption = "Łyżka"
@@ -292,7 +280,6 @@ Dziękujemy za udział.
 / optionvalues = ("-2", "-1", "0", "1", "2")
 / orientation = horizontal
 / position = (10,61)
-
 </radiobuttons>
 
 <radiobuttons q10>
@@ -300,7 +287,7 @@ Dziękujemy za udział.
 / options = ("Zawsze lewej", "Zazwyczaj lewej", "Wszystko jedno", "Zazwyczaj prawej", "Zawsze prawej")
 / optionvalues = ("-2", "-1", "0", "1", "2")
 / orientation = horizontal
-/ position = (10,30)
+/ position = (10,73)
 </radiobuttons>
 
 
@@ -310,27 +297,25 @@ Dziękujemy za udział.
 ** TODO: /trials = [1-6 = sentence]
 <block interpreter_trening>   
 /preinstructions = (instructions, trening)
-/trials = [1-3 = sentence_trening]
+/trials = [1-6 = sentence_trening]
 </block>
 
 
 ** TODO: /trials = [1-16 = sentence]
 <block interpreter1>   
 /preinstructions = (wlasciwa_sesja)
-/trials = [1-3 = sentence]
+/trials = [1-16 = sentence]
 /onblockend = [ values.percent_right=values.sum_right/values.sum_total*100 ]
-/onblockend = [ values.percent_left=(values.sum_ans-values.sum_right)/ values.sum_total*100 ]
-/onblockend = [ values.percent_ansright=values.sum_right/values.sum_ans*100 ]
+/onblockend = [ values.percent_left=(values.sum_total-values.sum_right)/ values.sum_total*100 ]
 </block>
 
 
 ** TODO: /trials = [1-16 = sentence]
 <block interpreter2do4>   
 /preinstructions = (przerwa)
-/trials = [1-3 = sentence]
+/trials = [1-16 = sentence]
 /onblockend = [ values.percent_right=values.sum_right/values.sum_total*100 ]
-/onblockend = [ values.percent_left=(values.sum_ans-values.sum_right)/ values.sum_total*100 ]
-/onblockend = [ values.percent_ansright=values.sum_right/values.sum_ans*100 ]
+/onblockend = [ values.percent_left=(values.sum_total-values.sum_right)/ values.sum_total*100 ]
 </block>
 
 
@@ -353,39 +338,32 @@ Dziękujemy za udział.
 <trial fixation>
 /stimulusframes = [1 = fixation]
 /timeout = values.fixationduration
-/posttrialpause = values.fixation_posttrialpause
 /branch = [trial.target]
 /recorddata = false
 </trial>
 
 
 ** Próba (ramka) właściwa, z wyborem słowa   
-tu możliwość odpowiedzi i wyliczane zmienne do podsumowania 
+tu możliwość odpowiedzi i wyliczane zmienne do podsumowania
 <trial target>
 /ontrialbegin = [trial.target.recorddata=true]
 /stimulusframes = [1 = fixation, lefttarget, righttarget]
 /isvalidresponse = [trial.target.response == values.responsekey_left || trial.target.response == values.responsekey_right]
 /timeout=values.targetduration
 /iscorrectresponse = [ trial.target.response == values.responsekey_right ]
-/ontrialend = [values.sum_total+=1 ; 
+/ontrialend = [values.sum_total+=1;
                if (trial.target.correct) {
-            			values.sum_right+=1 };
-                if (trial.target.response == values.responsekey_right  || trial.target.response == values.responsekey_left) {
-				        values.sum_ans+=1;                      } 
-               else {trial.target.recorddata=false}]
-/branch = [if (trial.target.response != values.responsekey_right &&  trial.target.response != values.responsekey_left) { trial.blank}]
+            			values.sum_right+=1 }]
+/branch = [if (trial.target.response != values.responsekey_right  &&  trial.target.response != values.responsekey_left) { trial.blank}]
 </trial>
 
 **Próba (ramka) pusta pozwalająca na udzielenie odpowiedzi po zniknięciu słów
-wyłączona opcja: /timeout=values.blank_ans_duration
 <trial blank>
 /stimulusframes = [1 = blank]
 /isvalidresponse = [trial.blank.response == values.responsekey_left || trial.blank.response == values.responsekey_right]
 /iscorrectresponse = [ trial.blank.response == values.responsekey_right ]
-/ontrialend = [ if (trial.blank.correct) {
-				     values.sum_right+=1 } ;
-               if (trial.blank.response == values.responsekey_right  || trial.blank.response == values.responsekey_left) {
-				     values.sum_ans+=1 } ]
+/ontrialend = [if (trial.blank.correct) {
+				     values.sum_right+=1 }]
 </trial>
 
 
@@ -403,7 +381,6 @@ wyłączona opcja: /timeout=values.blank_ans_duration
 <trial fixation_trening>
 /stimulusframes = [1 = fixation]
 /timeout = values.fixationduration
-/posttrialpause = values.fixation_posttrialpause
 /branch = [trial.target_trening]
 /recorddata = false
 </trial>
@@ -423,13 +400,23 @@ tu możliwość odpowiedzi i wyliczane zmienne do podsumowania
 </trial>
 
 **Próba (ramka) pusta pozwalająca na udzielenie odpowiedzi po zniknięciu słów
-wyłączona opcja: /timeout=values.blank_ans_duration
 <trial blank_trening>
 /stimulusframes = [1 = blank]
 /isvalidresponse = [trial.blank_trening.response == values.responsekey_left || trial.blank_trening.response == values.responsekey_right]
 /iscorrectresponse = [ trial.blank_trening.response == values.responsekey_right ]
 /branch = [if (trial.blank_trening.response == values.responsekey_right) {trial.trening_right}]
 /branch = [if (trial.blank_trening.response == values.responsekey_left) {trial.trening_left}]
+/branch = [{trial.remind_trening}]
+/timeout=values.trening_remind_delay
+/recorddata = false
+</trial>
+
+<trial remind_trening>
+/stimulusframes = [1 = trening_reminder]
+/isvalidresponse = [trial.remind_trening.response == values.responsekey_left || trial.remind_trening.response == values.responsekey_right]
+/iscorrectresponse = [ trial.remind_trening.response == values.responsekey_right ]
+/branch = [if (trial.remind_trening.response == values.responsekey_right) {trial.trening_right}]
+/branch = [if (trial.remind_trening.response == values.responsekey_left) {trial.trening_left}]
 /recorddata = false
 </trial>
 
@@ -438,12 +425,14 @@ wyłączona opcja: /timeout=values.blank_ans_duration
 /stimulusframes = [1 = trening_right]
 /timeout = values.trening_feedback_duration
 /recorddata = false
+/posttrialpause = values.trening_posttrialpause
 </trial>
 
 <trial trening_left>
 /stimulusframes = [1 = trening_left]
 /timeout = values.trening_feedback_duration
 /recorddata = false
+/posttrialpause = values.trening_posttrialpause
 </trial>
 
 
@@ -451,18 +440,27 @@ wyłączona opcja: /timeout=values.blank_ans_duration
 ------------------------------------------- ELEMENTY PODSTAWOWE -------------------------------------------
 
 
-**** PONIŻEJ NALEŻY WPISAĆ W NAWIASIE (po "noreplace") ZAKRES, OKREŚLAJĄCY Z PULI ILU SŁÓW LOSUJEMY 
- item.nouns.itemcount  - jak uzyc ? 
+** TODO: /select=noreplace(1-X)  --  X=ilość zdań/słów w puli
+* /resetinterval = 1000  --  po ilu blokach resetuje się pula (u nas jest tylko kilka bloków, więc liczba 100 gwarantuje,
+                             że u nas nie nastąpi reset
+
+<counter random_sentences_counter>
+/allowrepeats = false
+/select=noreplace(1-70)
+/selectionrate = always
+/resetinterval = 1000
+</counter>
+
 <counter random_nouns_counter>
 /allowrepeats = false
 /select=noreplace(1-103)
 /selectionrate = always
+/resetinterval = 1000
 </counter>
-
 
 <text sentence> 
 /items=sentences
-/select = noreplace
+/select = random_sentences_counter
 /hposition = values.sentence_xpos
 /vposition = values.sentence_ypos
 </text>
@@ -498,12 +496,16 @@ wyłączona opcja: /timeout=values.blank_ans_duration
 </shape>
 
 
+<text trening_reminder> 
+/items=("Proszę, wybierz odpowiedź. Przypominamy, że palec wskazujący lewej ręki powinien leżeć na klawiszu <%values.response_left_letter%> a palec wskazujący prawej ręki na klawiszu <%values.response_right_letter%>.")
+</text>
+
 <text trening_right> 
-/items=("Wybrałaś/eś prawą odpowiedź!")
+/items=("Wybrałaś/eś PRAWĄ odpowiedź!")
 </text>
 
 <text trening_left> 
-/items=("Wybrałaś/eś lewą odpowiedź!")
+/items=("Wybrałaś/eś LEWĄ odpowiedź!")
 </text>
 
 ------------------------------------------- PULA ITEMÓW -------------------------------------------
