@@ -72,6 +72,9 @@ Oprócz tu modyfikowanych zmiennych, ważne zmienne modyfikowane niżej w kodzie
 /sum_right=0
 /percent_right=0
 /percent_left=0
+
+/total_latency=0
+/final_answer=0
 </values>
 
 
@@ -80,7 +83,7 @@ data, czas, osoba,
 czas fiksacji, zdania, słów, czekania na odp po słowach
 zdanie, słowo z lewej, słowo z prawej 
 kod odpowiedzi dla prawej, kod odpowiedzi osoby badanej 
-latencja
+latencja 
 <data>
 /file = "Interpreter_rawdata.iqdat"
 /separatefiles = false
@@ -91,7 +94,7 @@ radiobuttons.q7.selectedvalue, radiobuttons.q8.selectedvalue, radiobuttons.q9.se
 radiobuttons.q10.selectedvalue,
 values.fixationduration, values.sentenceduration, values.targetduration,
 text.sentence.currentitem, text.lefttarget.currentitem, text.righttarget.currentitem,
-trial.target.response, trial.blank.response, trial.target.latency, trial.blank.latency ]
+trial.target.response, trial.blank.response, values.final_answer, trial.target.latency, trial.blank.latency, values.total_latency]
 </data>
 
 
@@ -346,14 +349,20 @@ values.percent_right, values.percent_left ]
 ** Próba (ramka) właściwa, z wyborem słowa   
 tu możliwość odpowiedzi i wyliczane zmienne do podsumowania
 <trial target>
-/ontrialbegin = [trial.target.recorddata=true]
+/ontrialbegin = [trial.target.recorddata=true; 
+                 values.final_answer=0;
+				 values.total_latency=0]
 /stimulusframes = [1 = fixation, lefttarget, righttarget]
 /isvalidresponse = [trial.target.response == values.responsekey_left || trial.target.response == values.responsekey_right]
 /timeout=values.targetduration
 /iscorrectresponse = [ trial.target.response == values.responsekey_right ]
 /ontrialend = [values.sum_total+=1;
-               if (trial.target.correct) {
-            			values.sum_right+=1 }]
+               values.total_latency=trial.target.latency;
+				if (trial.target.correct) {
+            			values.sum_right+=1 }; 
+				if (trial.target.response != values.responsekey_right  && trial.target.response != values.responsekey_left) 
+						{trial.target.recorddata=false}
+				else {values.final_answer=trial.target.response} ] 
 /branch = [if (trial.target.response != values.responsekey_right  &&  trial.target.response != values.responsekey_left) { trial.blank}]
 </trial>
 
@@ -363,7 +372,9 @@ tu możliwość odpowiedzi i wyliczane zmienne do podsumowania
 /isvalidresponse = [trial.blank.response == values.responsekey_left || trial.blank.response == values.responsekey_right]
 /iscorrectresponse = [ trial.blank.response == values.responsekey_right ]
 /ontrialend = [if (trial.blank.correct) {
-				     values.sum_right+=1 }]
+				     values.sum_right+=1 };
+				values.final_answer=trial.blank.response;
+				values.total_latency+=trial.blank.latency]
 </trial>
 
 
@@ -602,7 +613,9 @@ tu możliwość odpowiedzi i wyliczane zmienne do podsumowania
 /13="doktor"
 /14="droga"
 /15="dziecko"
+
 /16="dziewczyna"
+
 /17="dźwięk"
 /18="fakt"
 /19="głowa"
