@@ -91,7 +91,7 @@ latencja
 radiobuttons.q1.selectedvalue, radiobuttons.q2.selectedvalue, radiobuttons.q3.selectedvalue, 
 radiobuttons.q4.selectedvalue, radiobuttons.q5.selectedvalue, radiobuttons.q6.selectedvalue, 
 radiobuttons.q7.selectedvalue, radiobuttons.q8.selectedvalue, radiobuttons.q9.selectedvalue, 
-radiobuttons.q10.selectedvalue,
+radiobuttons.q10.selectedvalue, expressions.oldfield_suma,
 values.fixationduration, values.sentenceduration, values.targetduration,
 text.sentence.currentitem, text.lefttarget.currentitem, text.righttarget.currentitem,
 trial.target.response, trial.blank.response, values.final_answer, trial.target.latency, trial.blank.latency, values.total_latency]
@@ -117,7 +117,8 @@ expressions.oldfield_suma,
 values.fixationduration, values.targetduration,
 values.response_left_letter, values.response_right_letter, 
 values.sum_total, values.sum_right,
-values.percent_right, values.percent_left ]
+values.percent_right, values.percent_left,
+dropdown.select_student.selectedvalue ]
 </summarydata>
 
 
@@ -126,8 +127,8 @@ values.percent_right, values.percent_left ]
 
 <expt>
 /preinstructions = (welcome)
-/postinstructions = (the_end)
-/blocks = [1 = oldfield; 2 = interpreter_trening; 3 = interpreter1; 4-6 = interpreter2do4]
+/postinstructions = ()
+/blocks = [1 = oldfield; 2 = interpreter_trening; 3 = interpreter1; 4-6 = interpreter2do4; 7 = podsumowanie]
 </expt>
 
 
@@ -145,59 +146,96 @@ values.percent_right, values.percent_left ]
 
 <page welcome>
 ^Dziękujemy, że zdecydowałaś/eś się wziąć udział w naszym badaniu!
-^Dotyczy ono mechanizmów powstawania skojarzeń. Na końcu będziesz mieć możliwość zapoznania się z uzyskanymi wynikami
+^Dotyczy ono mechanizmów powstawania skojarzeń.
 ^Twój udział jest anonimowy, nie gromadzimy danych osobowych.
 
 ^^Badanie składa się z trzech części:
 ^1) Kwestionariusza preferencji stronnych,
 ^2) Sesji treningowej,
 ^3) Sesji testowej.
+
 ^^Całość badania nie potrwa dłużej niż 10 minut.
+^Na końcu będziesz mieć możliwość zapoznania się z uzyskanymi wynikami.
+
 ^^^Gdy będziesz gotowy/a, naciśnij spację i przejdziemy do części pierwszej.
 </page> 
 
 <page instructions> 
 ^Teraz nastąpi właściwa część badania.
-^^^W każdej próbie najpierw pojawi się przed tobą zdanie, skonstruowane wg schematu KTOŚ-ZROBIŁ-COŚ. 
-^Przeczytaj je uważnie i pomyśl czym ów ktoś mógł się kierować 
+
+^^^W każdej próbie najpierw pojawi się przed tobą zdanie skonstruowane wg schematu KTOŚ-ZROBIŁ-COŚ. 
+^Przeczytaj je uważnie i pomyśl czym ów ktoś mógł się kierować.
 ^Gdy zdanie zniknie, skup wzrok na "+" na środku ekranu. 
 ^Po chwili po obu stronach "+" migną krótko dwa słowa. 
-^^Zdecyduj, które z nich może być prawdopodobnie związane z motywem, którym kierowała się osoba opisana w zdaniu.
-^^Jeśli będzie to słowo po lewej stronie, naciśnij klawisz <%values.response_left_letter%>, a jeśli po prawej, wybierz klawisz <%values.response_right_letter%>.
-^^Jeśli oba pasują, wybierz to, które pasuje lepiej. 
+^Zdecyduj, które z nich może być prawdopodobnie związane z motywem, którym kierowała się osoba opisana w zdaniu.
+^Jeśli będzie to słowo po lewej stronie, naciśnij klawisz <%values.response_left_letter%>, a jeśli po prawej, wybierz klawisz <%values.response_right_letter%>.
+^Jeśli oba pasują, wybierz to, które pasuje lepiej. 
 
 ^^Słowa dobierane są losowo, nie ma z góry ustalonych dobrych i złych odpowiedzi. Wybieraj kierując się własnym wrażeniem.
 
 ^^Uwaga: 
 ^Nie czytaj słów tak jak zwykle, przenosząc wzrok z jednego na drugie. W tym badaniu musisz utrzymywać wzrok skupiony na samym środku ekranu, w miejscu zaznaczonym
-^krzyżykiem. Dzięki temu kiedy tylko słowa się pojawią będziesz mógł/mogła odczytać oba jednocześnie.
+krzyżykiem. Dzięki temu kiedy tylko słowa się pojawią będziesz mógł/mogła odczytać oba jednocześnie.
 
-Słowa będą wyświetlane bardzo krótko, tak że ich dokładne odczytanie może być trudne. To normalne. 
-^ Jeśli nie uda Ci się wyraźnie odczytać słowa, to nie szkodzi - zdaj się na to, co podpowiada Ci intuicja. Jeśli i ona nie pomoże, zgaduj.
- 
-
-
+^Słowa będą wyświetlane bardzo krótko, tak że ich dokładne odczytanie może być trudne. To normalne. 
+Jeśli nie uda Ci się wyraźnie odczytać słowa, to nie szkodzi - zdaj się na to, co podpowiada Ci intuicja.
+Jeśli i ona nie pomoże, zgaduj.
 </page> 
 
 <page trening> 
 ^Rozpocznijmy od sesji treningowej - ma ona na celu upewnienie się, że procedura jest jasna. Jej wynik nie zostanie zapisany.
-^^Połóż palec wskazujący lewej ręki na klawiszu <%values.response_left_letter%> a palec wskazujący prawej ręki na klawiszu <%values.response_right_letter%>.
+^^Połóż palec wskazujący lewej ręki na klawiszu <%values.response_left_letter%>, a palec wskazujący prawej ręki na klawiszu <%values.response_right_letter%>.
 ^^Gdy będziesz gotowy/a, naciśnij spację. </page> 
 
 <page wlasciwa_sesja> 
 ^Teraz rozpocznie się właściwa sesja badania.
-^^Połóż palec wskazujący lewej ręki na klawiszu <%values.response_left_letter%> a palec wskazujący prawej ręki na klawiszu <%values.response_right_letter%>.
+^^Połóż palec wskazujący lewej ręki na klawiszu <%values.response_left_letter%>, a palec wskazujący prawej ręki na klawiszu <%values.response_right_letter%>.
 ^^Gdy będziesz gotowy/a, naciśnij spację. </page> 
 
 <page przerwa> 
-^^^Czas na chwilę przerwy.
-^^Gdy odpoczniesz, połóż ponownie palec wskazujący lewej ręki na klawiszu <%values.response_left_letter%> a palec wskazujący prawej ręki na klawiszu <%values.response_right_letter%> i naciśnij spację.
+^^^Ukończone próby: <%values.sum_total%>, pozostało jeszcze: <%values.trials_count-values.sum_total%>. Czas na chwilę przerwy.
+^^Gdy odpoczniesz, połóż ponownie palec wskazujący lewej ręki na klawiszu <%values.response_left_letter%>, a palec wskazujący prawej ręki na klawiszu <%values.response_right_letter%> i naciśnij spację.
 </page>
 
+------------------------------------------- PODSUMOWANIE -------------------------------------------
+
+** strona nieużywana - zamieniona na survey podsumowanie
 <page the_end> 
 ^^^To już koniec badania. Dziękujemy za udział!
+^^^^Badanie miało na celu sprawdzenie hipotezy zakładającej, że w związku z różnicami sposobu w jaki lewa i prawa półkula mózgu przetwarza informacje językowe słowa
+po lewej stronie będzie łatwiej skojarzyć z opisanymi sytuacjami.
+^^Ty wybrałeś/aś <%values.sum_total-values.sum_right%> słów po lewej i <%values.sum_right%> słów po prawej stronie.
 </page>
 
+<survey podsumowanie>
+/ pages = [1=final_page]
+/ itemspacing = 2.5%
+/ showpagenumbers = false
+/ showquestionnumbers = false
+/ showbackbutton = false
+/ finishlabel = "Koniec"
+/ recorddata = false
+</survey>
+
+<surveypage final_page>
+/ caption = "To już koniec badania. Dziękujemy za udział!
+
+
+Badanie miało na celu sprawdzenie hipotezy zakładającej, że w związku z różnicami sposobu w jaki lewa i prawa półkula mózgu przetwarza informacje językowe słowa po lewej stronie będzie łatwiej skojarzyć z opisanymi sytuacjami.
+
+Ty wybrałeś/aś <%values.sum_total-values.sum_right%> słów po lewej i <%values.sum_right%> słów po prawej stronie."
+/ questions = [1=select_student]
+/ recorddata = false
+/ nextbuttonposition = (50,90)
+</surveypage>
+
+<dropdown select_student>
+/ caption = "Na zakończenie prosimy jeszcze, abyś wskazał/a osobę, która zaprosiła Cię do udziału w tym badaniu:"
+/ options = ("Katarzyna Dudek", "Kinga Dudzik", "Jan Giza", "Helena Greber", "Monika Halicka", "Iwona Kopeć",
+"Weronika Kot", "Krzysztof Kutt", "Mateusz Młynarczyk", "Anna Nowak", "Joanna Nowak", "Maciej Szul", "Maciej Ścibor",
+"Anna Tereszko", "Anna Wasik", "Katarzyna Wiernasz", "Paulina Wróbel", "Agata Zimirska")
+/ position = (10,60)
+</dropdown>
 
 *******************************************  OLDFIELD  *******************************************
 
@@ -216,14 +254,14 @@ Słowa będą wyświetlane bardzo krótko, tak że ich dokładne odczytanie moż
 <surveypage p1>
 / caption = "Przy każdej z wymienionych czynności i przedmiotów zaznacz której ręki wolisz używać"
 / questions = [1=q1, q2, q3, q4, q5]
-/recorddata = false
+/ recorddata = false
 / nextbuttonposition = (90,90)
 </surveypage>
 
 <surveypage p2>
 / caption = "Przy każdej z wymienionych czynności i przedmiotów zaznacz której ręki wolisz używać"
 / questions = [1=q6, q7, q8, q9, q10]
-/recorddata = false
+/ recorddata = false
 / nextbuttonposition = (90,90)
 </surveypage>
 
@@ -318,6 +356,12 @@ Słowa będą wyświetlane bardzo krótko, tak że ich dokładne odczytanie moż
 /preinstructions = (instructions, trening)
 /trials = [1-6 = sentence_trening]
 </block>
+
+
+** ilość prób we właściwym badaniu (bez treningu)
+<values>
+/trials_count = 64
+</values>
 
 
 ** TODO: /trials = [1-16 = sentence]
@@ -467,8 +511,8 @@ tu możliwość odpowiedzi i wyliczane zmienne do podsumowania
 ------------------------------------------- ELEMENTY PODSTAWOWE -------------------------------------------
 
 
-** TODO: /select=noreplace(1-X)  --  X=ilość zdań/słów w puli
-* /resetinterval = 1000  --  po ilu blokach resetuje się pula (u nas jest tylko kilka bloków, więc liczba 100 gwarantuje,
+** /select=noreplace(1-X)  --  X=ilość zdań/słów w puli
+** /resetinterval = 1000  --  po ilu blokach resetuje się pula (u nas jest tylko kilka bloków, więc liczba 100 gwarantuje,
                              że u nas nie nastąpi reset
 
 <counter random_sentences_counter>
@@ -524,7 +568,7 @@ tu możliwość odpowiedzi i wyliczane zmienne do podsumowania
 
 
 <text trening_reminder> 
-/items=("Proszę, wybierz odpowiedź. Przypominamy, że palec wskazujący lewej ręki powinien leżeć na klawiszu <%values.response_left_letter%> a palec wskazujący prawej ręki na klawiszu <%values.response_right_letter%>.")
+/items=("Proszę, wybierz odpowiedź. Przypominamy, że palec wskazujący lewej ręki powinien leżeć na klawiszu <%values.response_left_letter%>, a palec wskazujący prawej ręki na klawiszu <%values.response_right_letter%>.")
 </text>
 
 <text trening_right> 
@@ -540,7 +584,7 @@ tu możliwość odpowiedzi i wyliczane zmienne do podsumowania
 ** Pula zdań do losowania 
 <item sentences>
 /1="Sąsiedzi przygarnęli kota"
-/2="Nauczyciel kupił zamek"
+/2="Nauczyciel kupił kubek"
 /3="Portier postanowił rzucić pracę"
 /4="Sprzedawca kupił akcje"
 /5="Lekarz wyjechał do Afryki"
@@ -577,7 +621,7 @@ tu możliwość odpowiedzi i wyliczane zmienne do podsumowania
 /36="Marcin urządził przyjęcie"
 /37="Robotnik przełożył pracę"
 /38="Kaśka wyjechała na wakacje"
-/39="Michał znalazł szparagi"
+/39="Michał wybrał szparagi"
 /40="Jan przygotował pracę"
 /41="Wujek zabrał kanapki"
 /42="Przechodzień zamówił kawę"
