@@ -17,10 +17,10 @@ If left brain interpreter theory describes the reality, left-hand side words sho
 This link may be moderated by the handedness so we also provide Edinburgh Handedness Inventory authored by R.C. Oldfield.
 
 ### Files
-- `[interpreter.iqx]` -- Inquisit procedure
-- `[Inquisit_Data.xlsx]` -- Raw data (each row is a single stimulus: sentence + two words)
-- `[Analiza.xlsx]` -- Summary for each subject
-- `[Wyniki - prezentacja.pdf]` -- Results summary and discussion (in Polish)
+- **[interpreter.iqx]** -- Inquisit procedure
+- **[Inquisit_Data.xlsx]** -- Raw data (each row is a single stimulus: sentence + two words)
+- **[Analiza.xlsx]** -- Summary for each subject
+- **[Wyniki - prezentacja.pdf]** -- Results summary and discussion (in Polish)
 
 [Institute of Psychology]: <http://www.psychologia.uj.edu.pl/index.php/eng/>
 [Inquisit]: <http://www.millisecond.com/products/inquisit5/weboverview.aspx>
