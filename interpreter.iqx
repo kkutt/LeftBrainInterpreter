@@ -568,15 +568,17 @@ tu możliwość odpowiedzi i wyliczane zmienne do podsumowania
 
 
 <text trening_reminder> 
-/items=("Proszę, wybierz odpowiedź. Przypominamy, że palec wskazujący lewej ręki powinien leżeć na klawiszu <%values.response_left_letter%>, a palec wskazujący prawej ręki na klawiszu <%values.response_right_letter%>.")
+/items=("Proszę, wybierz odpowiedź.
+
+Przypominamy, że palec wskazujący lewej ręki powinien leżeć na klawiszu <%values.response_left_letter%>, a palec wskazujący prawej ręki na klawiszu <%values.response_right_letter%>.")
 </text>
 
 <text trening_right> 
-/items=("Wybrałaś/eś PRAWĄ odpowiedź!")
+/items=("Dobrze. Wybrałaś/eś słowo z prawej strony.")
 </text>
 
 <text trening_left> 
-/items=("Wybrałaś/eś LEWĄ odpowiedź!")
+/items=("Dobrze. Wybrałaś/eś słowo z lewej strony.")
 </text>
 
 ------------------------------------------- PULA ITEMÓW -------------------------------------------
@@ -759,7 +761,7 @@ tu możliwość odpowiedzi i wyliczane zmienne do podsumowania
 /99="zęby"
 /100="ziemia"
 /101="znak"
-/102="zwierze"
+/102="zwierzę"
 /103="żona"
 </item>
 
