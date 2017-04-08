@@ -1,0 +1,283 @@
+﻿
+** Zadanie dla lewopółkulowego interpretatora ** 
+Skrót działania: Z puli zdań losowane jest jedno(bez zwracania), z puli słów dwa słowa(również bez zwracania).
+Wyświetlane jest najpierw zdanie, potem punkt fiksacji (+), potem dwa słowa oraz "+".
+Jeśli odpowiedź nie została udzielona podczas prezentacji słów, to pojawia się jeszcze biały, pusty ekran, podczas którego można udzielić odpowiedzi.
+Czasy prezentacji można ustawiać osobno dla każdej z prezentowanych treści.
+Zapisywane są póki co dane surowe oraz krótkie podsumowanie 
+
+** Ustawienia domyślne 
+<defaults>
+/ fontstyle = ("Lucida Console", 3.00%, false, false, false, false, 5, 1)
+/ txcolor = (0, 0, 0)
+/screencolor = white
+</defaults>
+
+
+** Zmienne do modyfikacji:
+------------Pozycje bodźców na ekranie ------------------ w procentach wielkości ekranu, można w pikselach
+left_xpos - pozycja lewego słowa na ekranie - w poziomie  
+left_ypos - pozycja lewego słowa na ekranie - w pionie 
+analogicznie z prawym słowem (right_*pos) i zdaniem (sentence_*pos) 
+
+----------- Czas wyświetlania elementów i przerwy -------  ? w ms czy lepiej w ramkach, by wyliczyć dokładny czas prezentacji ?
+/sentenceduration - czas wyświetlania zdania przed słowami
+/fixationduration  - czas wyświetlania samego punktu fiksacji
+/targetduration = - czas wyświetlania punktu fiksacji + słów
+/blank_ans_duration - czas wyświetlania pustego ekranu i oczekiwania na odpowiedz po zniknięciu słów
+/fixation_posttrialpause - przerwa między fiksacją a słowami
+/target_posttrialpause - przerwa między słowami a zdaniem 
+? jeśli ma być losowany czas wyswietlania czegokolwiek to albo zrobić counter, albo użyć expressions 
+
+----------- Klawisze odpowiedzi -------------------------
+/responsekey_left  - klawisz odpowiedzi do lewej strony (30=A, 38=L)
+/responsekey_right - klawisz odpowiedzi przypisany do prawej strony (z.help)
+/response_left_letter - to co w responsekey_left tylko zapisane jako litera; right analogicznie
+
+<values> 
+/left_xpos=40
+/right_xpos=60
+/left_ypos=50
+/right_ypos=50
+/sentence_xpos=40
+/sentence_ypos=25
+
+/sentenceduration = 2000
+/fixationduration = 800
+/targetduration = 400
+/blank_ans_duration= 5000
+/fixation_posttrialpause = 0
+/blank_ans_posttrialpause = 0
+
+/responsekey_left = 30
+/responsekey_right = 38
+/response_left_letter="A"
+/response_right_letter="L"
+</values> 
+
+** Zmienne do zapisu danych, uaktualniane w trakcie 
+/sum_total  - ile prób
+/sum_right - ile wybranych z prawej strony
+/sum_ans - w ilu próbach pojawiła się odpowiedź
+/percent_right  - w ilu % z wszystkich prób odpowiedź dot. prawej strony (=prawa/próby) 
+/percent_left  
+/percent_ansright   ile % z odpowiedzi dotyczyło prawej strony  (=prawa/próby z odpowiedziami)
+<values>
+/sum_total=0
+/sum_right=0
+/sum_ans=0
+/percent_right=0
+/percent_left=0
+/percent_ansright=0
+</values>
+
+
+**** Zapis zmiennych do pliku - dane surowe 
+data, czas, osoba, 
+czas fiksacji, zdania, słów, czekania na odp po słowach
+zdanie, słowo z lewej, słowo z prawej 
+kod odpowiedzi dla prawej, kod odpowiedzi osoby badanej 
+latencja
+<data>
+/file = "Interpreter_rawdata.iqdat"
+/separatefiles = false
+/columns = [date, time, subject, 
+values.fixationduration, values.sentenceduration, values.targetduration, values.blank_ans_duration,
+text.sentence.currentitem, text.lefttarget.currentitem, text.righttarget.currentitem,
+values.responsekey_right, trial.target.response, trial.blank.response,
+ trial.target.latency, trial.blank.latency ]
+</data>
+
+
+** Zapis zmiennych - podsumowanie 
+data, czas, osoba badana -id,
+czas fiksacji, czas pokazania slow, czas czekania na odp
+inne czasy 
+
+<summarydata >
+/file = "Interpreter_summary.iqdat"
+/columns = [script.startdate, script.starttime, script.subjectid,
+values.fixationduration, values.targetduration, values.blank_ans_duration,
+values.fixation_posttrialpause, values.blank_ans_posttrialpause, values.response_left_letter, values.response_right_letter, 
+ values.sum_total, values.sum_ans, values.sum_right, values.percent_right, values.percent_ansright, values.percent_left ]
+</summarydata>
+
+---------------------------
+
+** Pula zdań do losowania 
+<item sentences>
+/1="Król kupił konia " 
+/2=" Mnich zalał się łzami" 
+/3= " Lekarka wyjechała do Egiptu " 
+/4=" Siostra zjadła kredę"
+/5=" Ojciec nakrzyczał na kota"
+</item>
+
+
+** Pula rzeczowników do losowania - UWAGA: PONIŻEJ NALEŻY WPISAĆ ICH LICZBĘ
+<item nouns> 
+/1="lampa"
+/2= "szklanka"
+/3="wiatrak" 
+/4= "kaszka"
+/5="igraszka"
+/6="miotła"
+/7= "tęcza"
+/8="kłącze"
+/9= "parów"
+/10="kubek"
+/11="drzewo"
+/12= "rzeka"
+/13="kryza" 
+/14= "bryza"
+/15="statek"
+</item>
+
+
+**** PONIŻEJ NALEŻY WPISAĆ W NAWIASIE (po "noreplace") ZAKRES, OKREŚLAJĄCY Z PULI ILU SŁÓW LOSUJEMY 
+ item.nouns.itemcount  - jak uzyc ? 
+<counter random_nouns_counter>
+/allowrepeats = false
+/select=noreplace(1-15)
+/selectionrate = always
+</counter>
+
+
+<text sentence> 
+/items=sentences
+/select = noreplace
+/hposition = values.sentence_xpos
+/vposition = values.sentence_ypos
+</text>
+
+<text lefttarget>
+/items = nouns
+/select = random_nouns_counter
+/hposition = values.left_xpos
+/vposition = values.left_ypos
+</text> 
+
+<text righttarget> 
+/items=nouns
+/select= random_nouns_counter
+/hposition = values.right_xpos
+/vposition = values.right_ypos
+</text> 
+
+
+<text fixation>
+/items=("+")
+/position = (50,50)
+</text>
+
+** Biały prostokąt zakrywający ekran 
+<shape blank>
+/color=white
+/shape=rectangle
+/position=(0%,0%)
+/size = (100%,100%) 
+/valign = top
+/halign = left
+</shape>
+
+** Instrukcje 
+<instruct>
+/ fontstyle = ("Lucida Console", 2.5%, false, false, false, false, 5, 1)
+/ txcolor = (0, 0, 0)
+/windowsize = (70%, 70%)
+/ nextkey= (57)
+/nextlabel =("Spacja")
+/prevlabel = ("Backspace")
+/prevkey = (14)
+/lastlabel = ("Spacja")
+</instruct>
+
+
+<page instructions> 
+W każdej próbie pojawi się przed tobą krótkie zdanie. Przeczytaj je dokładnie. 
+^ Gdy zdanie zniknie, skoncentruj wzrok na "+" w centrum ekranu. 
+Po chwili po obu stronach "+" ukażą się na krótko dwa słowa. 
+^^ Zdecyduj, które z nich lepiej nadaje się jako wyjaśnienie sytuacji przedstawionej w zdaniu. 
+^^ Jeśli będzie to słowo po lewej stronie, naciśnij <%values.response_left_letter%>, a jeśli po prawej, wybierz <%values.response_right_letter%>.
+^^^ W tym zadaniu nie ma dobrych i złych odpowiedzi. Spróbuj wymyślić, które słowo może być związane z przyczyną sytuacji. Możesz zdać się na swoją intuicję. 
+^ Po zniknięciu słów na odpowiedź będzie <%values.blank_ans_duration/1000 %> sekund.
+</page> 
+
+<page remind> 
+Połóż palec lewej ręki na klawiszu <%values.response_left_letter%>, a palec prawej ręki na klawiszu <%values.response_right_letter%> 
+^ Gdy będziesz gotowy/a, naciśnij spację. </page> 
+
+<page the_end> 
+To już koniec badania.
+Dziękujemy za udział.
+</page>
+
+
+****** Próby: 
+- trial.sentence wywołuje trial fixation, który wywołuje trial target, który (jesli podczas niego nie zostala podana odpowiedz) wywola trial blank
+ (możliwość manipulowania czasami wyświetlania odrębnie) 
+
+** Próba(ramka) ze zdaniem 
+<trial sentence>
+/stimulusframes = [1 = blank, sentence]
+/timeout = values.sentenceduration
+/branch = [trial.fixation]
+/recorddata = false
+</trial>
+
+** Próba (ramka) z punktem fiksacji
+<trial fixation>
+/stimulusframes = [1 = fixation]
+/timeout = values.fixationduration
+/posttrialpause = values.fixation_posttrialpause
+/branch = [trial.target]
+/recorddata = false
+</trial>
+
+
+** Próba (ramka) właściwa, z wyborem słowa   
+tu możliwość odpowiedzi i wyliczane zmienne do podsumowania 
+<trial target>
+/ontrialbegin = [trial.target.recorddata=true]
+/stimulusframes = [1 = fixation, lefttarget, righttarget]
+/isvalidresponse = [trial.target.response == values.responsekey_left || trial.target.response == values.responsekey_right]
+/timeout=values.targetduration
+/iscorrectresponse = [ trial.target.response == values.responsekey_right ]
+/ontrialend = [ if (trial.target.correct) {
+				values.sum_right+=1 } ]
+/ontrialend = [if (trial.target.response == values.responsekey_right  || trial.target.response == values.responsekey_left) {
+				values.sum_ans+=1 } ]
+/ontrialend = [ values.sum_total+=1 ]
+/ontrialend =  [if (trial.target.response != values.responsekey_right &&  trial.target.response != values.responsekey_left) {trial.target.recorddata=false}]
+
+/branch = [if (trial.target.response != values.responsekey_right &&  trial.target.response != values.responsekey_left) { trial.blank}]
+</trial>
+
+**Próba (ramka) pusta pozwalająca na udzielenie odpowiedzi po zniknięciu słów
+<trial blank>
+/stimulusframes = [1 = blank]
+/isvalidresponse = [trial.blank.response == values.responsekey_left || trial.blank.response == values.responsekey_right]
+/timeout=values.blank_ans_duration
+/iscorrectresponse = [ trial.blank.response == values.responsekey_right ]
+/ontrialend = [ if (trial.blank.correct) {
+				values.sum_right+=1 } ]
+/ontrialend = [if (trial.blank.response == values.responsekey_right  || trial.blank.response == values.responsekey_left) {
+				values.sum_ans+=1 } ]
+/posttrialpause = values.blank_ans_posttrialpause
+</trial>
+
+
+** Blok: wpisac, ile triali
+<block interpreter>   
+/trials = [1-5= sentence]
+/onblockend = [values.percent_right=values.sum_right/values.sum_total*100]
+/onblockend = [ values.percent_left=(values.sum_ans-values.sum_right)/ values.sum_total*100]
+/onblockend = [ values.percent_ansright=values.sum_right/values.sum_ans*100]
+</block>
+
+** Eksperyment
+<expt>
+/preinstructions = (instructions, remind)
+/postinstructions = (the_end)
+/blocks = [1 = interpreter]
+</expt>
