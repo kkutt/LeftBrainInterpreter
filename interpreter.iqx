@@ -6,11 +6,13 @@ Jeśli odpowiedź nie została udzielona podczas prezentacji słów, to pojawia 
 Czasy prezentacji można ustawiać osobno dla każdej z prezentowanych treści.
 Zapisywane są póki co dane surowe oraz krótkie podsumowanie 
 
-** Ustawienia domyślne 
+** Ustawienia domyślne (czcionka, kolor ekranu, rozmiar ekranu)
 <defaults>
-/ fontstyle = ("Lucida Console", 3.00%, false, false, false, false, 5, 1)
-/ txcolor = (0, 0, 0)
+/ fontstyle = ("Tahoma", 2.7%, false, false, false, false, 5, 1)
+/txcolor = (0, 0, 0)
 /screencolor = white
+/canvassize = (900px, 600px)
+/canvasaspectratio=(3, 2)
 </defaults>
 
 
@@ -26,7 +28,7 @@ analogicznie z prawym słowem (right_*pos) i zdaniem (sentence_*pos)
 /targetduration = - czas wyświetlania punktu fiksacji + słów
 /blank_ans_duration - czas wyświetlania pustego ekranu i oczekiwania na odpowiedz po zniknięciu słów
 /fixation_posttrialpause - przerwa między fiksacją a słowami
-/target_posttrialpause - przerwa między słowami a zdaniem 
+/blank_ans_posttrialpause - przerwa między kolejnymi przykładami 
 ? jeśli ma być losowany czas wyswietlania czegokolwiek to albo zrobić counter, albo użyć expressions 
 
 ----------- Klawisze odpowiedzi -------------------------
@@ -34,25 +36,31 @@ analogicznie z prawym słowem (right_*pos) i zdaniem (sentence_*pos)
 /responsekey_right - klawisz odpowiedzi przypisany do prawej strony (z.help)
 /response_left_letter - to co w responsekey_left tylko zapisane jako litera; right analogicznie
 
+
+-------------------------------------
+Oprócz tu modyfikowanych zmiennych, ważne zmienne modyfikowane niżej w kodzie to
+- liczba triali w bloku eksperymentalnym (pod koniec, w elemencie "< block interpreter >" )
+- listy zdań i rzeczowników (przy rzeczownikach należy osobno poniżej wpisać ich liczbę)
+
 <values> 
-/left_xpos=40
-/right_xpos=60
+/left_xpos=43
+/right_xpos=57
 /left_ypos=50
 /right_ypos=50
-/sentence_xpos=40
-/sentence_ypos=25
+/sentence_xpos=50
+/sentence_ypos=50
 
 /sentenceduration = 2000
 /fixationduration = 800
-/targetduration = 400
+/targetduration = 150
 /blank_ans_duration= 5000
 /fixation_posttrialpause = 0
-/blank_ans_posttrialpause = 0
+/blank_ans_posttrialpause = 5000
 
-/responsekey_left = 30
-/responsekey_right = 38
-/response_left_letter="A"
-/response_right_letter="L"
+/responsekey_left = 33
+/responsekey_right = 36
+/response_left_letter="F"
+/response_right_letter="J"
 </values> 
 
 ** Zmienne do zapisu danych, uaktualniane w trakcie 
@@ -106,11 +114,11 @@ values.fixation_posttrialpause, values.blank_ans_posttrialpause, values.response
 
 ** Pula zdań do losowania 
 <item sentences>
-/1="Król kupił konia " 
-/2=" Mnich zalał się łzami" 
-/3= " Lekarka wyjechała do Egiptu " 
-/4=" Siostra zjadła kredę"
-/5=" Ojciec nakrzyczał na kota"
+/1="Król kupił konia." 
+/2=" Mnich zalał się łzami." 
+/3= "Lekarka wyjechała do Egiptu." 
+/4=" Siostra zjadła kredę."
+/5=" Ojciec nakrzyczał na kota."
 </item>
 
 
@@ -182,33 +190,31 @@ values.fixation_posttrialpause, values.blank_ans_posttrialpause, values.response
 
 ** Instrukcje 
 <instruct>
-/ fontstyle = ("Lucida Console", 2.5%, false, false, false, false, 5, 1)
-/ txcolor = (0, 0, 0)
-/windowsize = (70%, 70%)
+/windowsize = (100%, 100%)
 / nextkey= (57)
-/nextlabel =("Spacja")
-/prevlabel = ("Backspace")
+/nextlabel =("Naciśnij spację")
+/prevlabel = ("Naciśnij backspace")
 /prevkey = (14)
-/lastlabel = ("Spacja")
+/lastlabel = ("Naciśnij spację")
 </instruct>
 
 
 <page instructions> 
-W każdej próbie pojawi się przed tobą krótkie zdanie. Przeczytaj je dokładnie. 
+^^W każdej próbie pojawi się przed tobą krótkie zdanie. Przeczytaj je dokładnie. 
 ^ Gdy zdanie zniknie, skoncentruj wzrok na "+" w centrum ekranu. 
-Po chwili po obu stronach "+" ukażą się na krótko dwa słowa. 
+^Po chwili po obu stronach "+" ukażą się na krótko dwa słowa. 
 ^^ Zdecyduj, które z nich lepiej nadaje się jako wyjaśnienie sytuacji przedstawionej w zdaniu. 
-^^ Jeśli będzie to słowo po lewej stronie, naciśnij <%values.response_left_letter%>, a jeśli po prawej, wybierz <%values.response_right_letter%>.
+^^ Jeśli będzie to słowo po lewej stronie, naciśnij klawisz <%values.response_left_letter%>, a jeśli po prawej, wybierz klawisz <%values.response_right_letter%>.
 ^^^ W tym zadaniu nie ma dobrych i złych odpowiedzi. Spróbuj wymyślić, które słowo może być związane z przyczyną sytuacji. Możesz zdać się na swoją intuicję. 
-^ Po zniknięciu słów na odpowiedź będzie <%values.blank_ans_duration/1000 %> sekund.
+^^ Po zniknięciu słów na odpowiedź będzie <%values.blank_ans_duration/1000 %> sekund.
 </page> 
 
 <page remind> 
-Połóż palec lewej ręki na klawiszu <%values.response_left_letter%>, a palec prawej ręki na klawiszu <%values.response_right_letter%> 
-^ Gdy będziesz gotowy/a, naciśnij spację. </page> 
+^^Połóż palec wskazujący lewej ręki na klawiszu <%values.response_left_letter%> a palec wskazujący prawej ręki na klawiszu <%values.response_right_letter%>.
+^^Gdy będziesz gotowy/a, naciśnij spację. </page> 
 
 <page the_end> 
-To już koniec badania.
+^^^To już koniec badania.
 Dziękujemy za udział.
 </page>
 
@@ -243,13 +249,12 @@ tu możliwość odpowiedzi i wyliczane zmienne do podsumowania
 /isvalidresponse = [trial.target.response == values.responsekey_left || trial.target.response == values.responsekey_right]
 /timeout=values.targetduration
 /iscorrectresponse = [ trial.target.response == values.responsekey_right ]
-/ontrialend = [ if (trial.target.correct) {
-				values.sum_right+=1 } ]
-/ontrialend = [if (trial.target.response == values.responsekey_right  || trial.target.response == values.responsekey_left) {
-				values.sum_ans+=1 } ]
-/ontrialend = [ values.sum_total+=1 ]
-/ontrialend =  [if (trial.target.response != values.responsekey_right &&  trial.target.response != values.responsekey_left) {trial.target.recorddata=false}]
-
+/ontrialend = [values.sum_total+=1 ; 
+               if (trial.target.correct) {
+            			values.sum_right+=1 };
+                if (trial.target.response == values.responsekey_right  || trial.target.response == values.responsekey_left) {
+				        values.sum_ans+=1;                      } 
+               else {trial.target.recorddata=false}]
 /branch = [if (trial.target.response != values.responsekey_right &&  trial.target.response != values.responsekey_left) { trial.blank}]
 </trial>
 
@@ -260,16 +265,15 @@ tu możliwość odpowiedzi i wyliczane zmienne do podsumowania
 /timeout=values.blank_ans_duration
 /iscorrectresponse = [ trial.blank.response == values.responsekey_right ]
 /ontrialend = [ if (trial.blank.correct) {
-				values.sum_right+=1 } ]
-/ontrialend = [if (trial.blank.response == values.responsekey_right  || trial.blank.response == values.responsekey_left) {
-				values.sum_ans+=1 } ]
-/posttrialpause = values.blank_ans_posttrialpause
+				     values.sum_right+=1 } ;
+               if (trial.blank.response == values.responsekey_right  || trial.blank.response == values.responsekey_left) {
+				     values.sum_ans+=1 } ]
 </trial>
 
 
-** Blok: wpisac, ile triali
+** Blok: tu należy wpisac, ile triali (/trials)
 <block interpreter>   
-/trials = [1-5= sentence]
+/trials = [1-4= sentence]
 /onblockend = [values.percent_right=values.sum_right/values.sum_total*100]
 /onblockend = [ values.percent_left=(values.sum_ans-values.sum_right)/ values.sum_total*100]
 /onblockend = [ values.percent_ansright=values.sum_right/values.sum_ans*100]
