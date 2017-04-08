@@ -83,7 +83,7 @@ data, czas, osoba,
 czas fiksacji, zdania, słów, czekania na odp po słowach
 zdanie, słowo z lewej, słowo z prawej 
 kod odpowiedzi dla prawej, kod odpowiedzi osoby badanej 
-latencja 
+latencja
 <data>
 /file = "Interpreter_rawdata.iqdat"
 /separatefiles = false
@@ -145,8 +145,11 @@ values.percent_right, values.percent_left ]
 
 <page welcome>
 ^Dziękujemy, że zdecydowałaś/eś się wziąć udział w naszym badaniu!
-^^Składa się ono z trzech części:
-^1) Kwestionariusza,
+^Dotyczy ono mechanizmów powstawania skojarzeń. Na końcu będziesz mieć możliwość zapoznania się z uzyskanymi wynikami
+^Twój udział jest anonimowy, nie gromadzimy danych osobowych.
+
+^^Badanie składa się z trzech części:
+^1) Kwestionariusza preferencji stronnych,
 ^2) Sesji treningowej,
 ^3) Sesji testowej.
 ^^Całość badania nie potrwa dłużej niż 10 minut.
@@ -155,12 +158,25 @@ values.percent_right, values.percent_left ]
 
 <page instructions> 
 ^Teraz nastąpi właściwa część badania.
-^^^W każdej próbie pojawi się przed tobą krótkie zdanie. Przeczytaj je dokładnie. 
-^Gdy zdanie zniknie, skoncentruj wzrok na "+" w centrum ekranu. 
-^Po chwili po obu stronach "+" ukażą się na krótko dwa słowa. 
-^^Zdecyduj, które z nich lepiej nadaje się jako wyjaśnienie sytuacji przedstawionej w zdaniu. 
+^^^W każdej próbie najpierw pojawi się przed tobą zdanie, skonstruowane wg schematu KTOŚ-ZROBIŁ-COŚ. 
+^Przeczytaj je uważnie i pomyśl czym ów ktoś mógł się kierować 
+^Gdy zdanie zniknie, skup wzrok na "+" na środku ekranu. 
+^Po chwili po obu stronach "+" migną krótko dwa słowa. 
+^^Zdecyduj, które z nich może być prawdopodobnie związane z motywem, którym kierowała się osoba opisana w zdaniu.
 ^^Jeśli będzie to słowo po lewej stronie, naciśnij klawisz <%values.response_left_letter%>, a jeśli po prawej, wybierz klawisz <%values.response_right_letter%>.
-^^^W tym zadaniu nie ma dobrych i złych odpowiedzi. Spróbuj wymyślić, które słowo może być związane z przyczyną sytuacji. Możesz zdać się na swoją intuicję. 
+^^Jeśli oba pasują, wybierz to, które pasuje lepiej. 
+
+^^Słowa dobierane są losowo, nie ma z góry ustalonych dobrych i złych odpowiedzi. Wybieraj kierując się własnym wrażeniem.
+
+^^Uwaga: 
+^Nie czytaj słów tak jak zwykle, przenosząc wzrok z jednego na drugie. W tym badaniu musisz utrzymywać wzrok skupiony na samym środku ekranu, w miejscu zaznaczonym
+^krzyżykiem. Dzięki temu kiedy tylko słowa się pojawią będziesz mógł/mogła odczytać oba jednocześnie.
+
+Słowa będą wyświetlane bardzo krótko, tak że ich dokładne odczytanie może być trudne. To normalne. 
+^ Jeśli nie uda Ci się wyraźnie odczytać słowa, to nie szkodzi - zdaj się na to, co podpowiada Ci intuicja. Jeśli i ona nie pomoże, zgaduj.
+ 
+
+
 </page> 
 
 <page trening> 
@@ -613,9 +629,7 @@ tu możliwość odpowiedzi i wyliczane zmienne do podsumowania
 /13="doktor"
 /14="droga"
 /15="dziecko"
-
 /16="dziewczyna"
-
 /17="dźwięk"
 /18="fakt"
 /19="głowa"
