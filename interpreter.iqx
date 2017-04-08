@@ -209,6 +209,7 @@ Dziękujemy za udział.
 / caption = "Przy każdej z wymienionych czynności i przedmiotów zaznacz której ręki wolisz używać"
 / questions = [1=q1, q2, q3, q4, q5]
 /recorddata = false
+/ nextbuttonposition = (90,90)
 </surveypage>
 
 
@@ -216,6 +217,7 @@ Dziękujemy za udział.
 / caption = "Przy każdej z wymienionych czynności i przedmiotów zaznacz której ręki wolisz używać"
 / questions = [1=q6, q7, q8, q9, q10]
 /recorddata = false
+/ nextbuttonposition = (90,90)
 </surveypage>
 
 
@@ -224,6 +226,7 @@ Dziękujemy za udział.
 / options = ("Zawsze lewej", "Zazwyczaj lewej", "Wszystko jedno", "Zazwyczaj prawej", "Zawsze prawej")
 / optionvalues = ("-2", "-1", "0", "1", "2")
 / orientation = horizontal
+/ position = (10,25)
 </radiobuttons>
 
 <radiobuttons q2>
@@ -231,6 +234,7 @@ Dziękujemy za udział.
 / options = ("Zawsze lewej", "Zazwyczaj lewej", "Wszystko jedno", "Zazwyczaj prawej", "Zawsze prawej")
 / optionvalues = ("-2", "-1", "0", "1", "2")
 / orientation = horizontal
+/ position = (10,37)
 </radiobuttons>
 
 <radiobuttons q3>
@@ -238,6 +242,7 @@ Dziękujemy za udział.
 / options = ("Zawsze lewej", "Zazwyczaj lewej", "Wszystko jedno", "Zazwyczaj prawej", "Zawsze prawej")
 / optionvalues = ("-2", "-1", "0", "1", "2")
 / orientation = horizontal
+/ position = (10,49)
 </radiobuttons>
 
 <radiobuttons q4>
@@ -245,6 +250,7 @@ Dziękujemy za udział.
 / options = ("Zawsze lewej", "Zazwyczaj lewej", "Wszystko jedno", "Zazwyczaj prawej", "Zawsze prawej")
 / optionvalues = ("-2", "-1", "0", "1", "2")
 / orientation = horizontal
+/ position = (10,61)
 </radiobuttons>
 
 <radiobuttons q5>
@@ -252,6 +258,7 @@ Dziękujemy za udział.
 / options = ("Zawsze lewej", "Zazwyczaj lewej", "Wszystko jedno", "Zazwyczaj prawej", "Zawsze prawej")
 / optionvalues = ("-2", "-1", "0", "1", "2")
 / orientation = horizontal
+/ position = (10,73)
 </radiobuttons>
 
 <radiobuttons q6>
@@ -259,13 +266,16 @@ Dziękujemy za udział.
 / options = ("Zawsze lewej", "Zazwyczaj lewej", "Wszystko jedno", "Zazwyczaj prawej", "Zawsze prawej")
 / optionvalues = ("-2", "-1", "0", "1", "2")
 / orientation = horizontal
+/ position = (10,25)
 </radiobuttons>
+
 
 <radiobuttons q7>
 / caption = "Łyżka"
 / options = ("Zawsze lewej", "Zazwyczaj lewej", "Wszystko jedno", "Zazwyczaj prawej", "Zawsze prawej")
 / optionvalues = ("-2", "-1", "0", "1", "2")
 / orientation = horizontal
+/ position = (10,37)
 </radiobuttons>
 
 <radiobuttons q8>
@@ -273,6 +283,7 @@ Dziękujemy za udział.
 / options = ("Zawsze lewej", "Zazwyczaj lewej", "Wszystko jedno", "Zazwyczaj prawej", "Zawsze prawej")
 / optionvalues = ("-2", "-1", "0", "1", "2")
 / orientation = horizontal
+/ position = (10,49)
 </radiobuttons>
 
 <radiobuttons q9>
@@ -280,6 +291,8 @@ Dziękujemy za udział.
 / options = ("Zawsze lewej", "Zazwyczaj lewej", "Wszystko jedno", "Zazwyczaj prawej", "Zawsze prawej")
 / optionvalues = ("-2", "-1", "0", "1", "2")
 / orientation = horizontal
+/ position = (10,61)
+
 </radiobuttons>
 
 <radiobuttons q10>
@@ -287,6 +300,7 @@ Dziękujemy za udział.
 / options = ("Zawsze lewej", "Zazwyczaj lewej", "Wszystko jedno", "Zazwyczaj prawej", "Zawsze prawej")
 / optionvalues = ("-2", "-1", "0", "1", "2")
 / orientation = horizontal
+/ position = (10,30)
 </radiobuttons>
 
 
@@ -399,7 +413,7 @@ tu możliwość odpowiedzi i wyliczane zmienne do podsumowania
 <trial target_trening>
 /ontrialbegin = [trial.target_trening.recorddata=false]
 /stimulusframes = [1 = fixation, lefttarget, righttarget]
-/isvalidresponse = [trial.target_trening.response == values.responsekey_left || trial.target.response == values.responsekey_right]
+/isvalidresponse = [trial.target_trening.response == values.responsekey_left || trial.target_trening.response == values.responsekey_right]
 /timeout=values.targetduration
 /iscorrectresponse = [ trial.target_trening.response == values.responsekey_right ]
 /branch = [if (trial.target_trening.response == values.responsekey_left) {trial.trening_left}]
@@ -412,7 +426,7 @@ tu możliwość odpowiedzi i wyliczane zmienne do podsumowania
 wyłączona opcja: /timeout=values.blank_ans_duration
 <trial blank_trening>
 /stimulusframes = [1 = blank]
-/isvalidresponse = [trial.blank_trening.response == values.responsekey_left || trial.blank.response == values.responsekey_right]
+/isvalidresponse = [trial.blank_trening.response == values.responsekey_left || trial.blank_trening.response == values.responsekey_right]
 /iscorrectresponse = [ trial.blank_trening.response == values.responsekey_right ]
 /branch = [if (trial.blank_trening.response == values.responsekey_right) {trial.trening_right}]
 /branch = [if (trial.blank_trening.response == values.responsekey_left) {trial.trening_left}]
